@@ -1,4 +1,9 @@
-add_executable(saga src/main.cpp src/framework/application.cpp)
+add_executable(
+    saga
+    src/main.cpp
+    include/framework/application.h
+    src/framework/application.cpp
+)
 
 target_include_directories(saga PRIVATE include)
 
