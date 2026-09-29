@@ -1,23 +1,13 @@
 #include "framework/application.h"
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode({800, 600}), "Saga");
+  std::unique_ptr<saga::Application> app =
+      std::make_unique<saga::Application>();
 
-  while (window.isOpen()) {
-    while (const std::optional event = window.pollEvent()) {
-      if (event->is<sf::Event::Closed>()) {
-        window.close();
-      }
-    }
-
-    window.clear(sf::Color::Black);
-    window.display();
-  }
-
-  Application app;
-  app.init();
+  app->run();
 
   return 0;
 }

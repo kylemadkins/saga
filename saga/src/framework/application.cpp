@@ -1,7 +1,17 @@
 #include "framework/application.h"
 
-#include <iostream>
+saga::Application::Application()
+    : m_window(sf::VideoMode({800, 600}), "Saga") {}
 
-Application::Application() {}
+void saga::Application::run() {
+  while (m_window.isOpen()) {
+    while (const std::optional event = m_window.pollEvent()) {
+      if (event->is<sf::Event::Closed>()) {
+        m_window.close();
+      }
+    }
 
-void Application::init() { std::cout << "init application\n"; }
+    m_window.clear(sf::Color::Black);
+    m_window.display();
+  }
+}
