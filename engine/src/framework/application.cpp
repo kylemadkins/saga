@@ -1,4 +1,5 @@
 #include "framework/application.h"
+#include "framework/core.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -8,12 +9,18 @@
 namespace saga {
 Application::Application()
     : m_window{sf::VideoMode{{800, 600}}, "Saga"}, m_target_fps{60.0f},
-      m_tick_clock{} {}
+      m_tick_clock{} {
+  m_window.setVerticalSyncEnabled(true);
+}
 
 void Application::run() {
   m_tick_clock.restart();
   float accumulated_time_s{0.f};
   float target_delta_time_s{1.f / m_target_fps};
+
+  sf::Clock stats_clock;
+  int frames{0};
+  int ticks{0};
 
   while (m_window.isOpen()) {
     while (const std::optional event = m_window.pollEvent()) {
@@ -22,13 +29,24 @@ void Application::run() {
       }
     }
 
-    accumulated_time_s += m_tick_clock.restart().asSeconds();
+    float delta_time_s = m_tick_clock.restart().asSeconds();
+
+    accumulated_time_s += delta_time_s;
     while (accumulated_time_s >= target_delta_time_s) {
       accumulated_time_s -= target_delta_time_s;
       tick_internal(target_delta_time_s);
+      ticks++;
     }
 
     render_internal();
+    frames++;
+
+    if (stats_clock.getElapsedTime().asSeconds() >= 1.f) {
+      saga::log("%d frames, %d ticks in the last second\n", frames, ticks);
+      frames = 0;
+      ticks = 0;
+      stats_clock.restart();
+    }
   }
 }
 

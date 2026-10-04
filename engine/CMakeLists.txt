@@ -3,6 +3,8 @@ add_library(
     STATIC
     include/framework/application.h
     src/framework/application.cpp
+    include/framework/core.h
+    src/framework/core.cpp
     src/entry_point.cpp
 )
 
