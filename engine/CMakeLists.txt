@@ -1,0 +1,14 @@
+add_library(
+    engine
+    STATIC
+    include/framework/application.h
+    src/framework/application.cpp
+    src/entry_point.cpp
+)
+
+target_include_directories(engine PUBLIC include)
+
+target_link_libraries(
+    engine
+    PUBLIC SFML::Graphics SFML::Window SFML::System SFML::Audio
+)

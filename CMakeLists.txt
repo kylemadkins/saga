@@ -16,4 +16,5 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
-add_subdirectory(saga)
+add_subdirectory(engine)
+add_subdirectory(game)

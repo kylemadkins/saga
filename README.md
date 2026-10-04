@@ -32,5 +32,5 @@ uvx pre-commit install
 It formats any staged `CMakeLists.txt` or `.cmake` files when you commit. If it changes a file, the commit stops; stage the changes and commit again. To format everything manually:
 
 ```
-uvx gersemi -i CMakeLists.txt saga
+uvx gersemi -i CMakeLists.txt engine game
 ```
