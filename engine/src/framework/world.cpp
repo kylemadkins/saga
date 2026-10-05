@@ -1,5 +1,4 @@
 #include "framework/world.h"
-#include "framework/core.h"
 
 namespace saga {
 World::World(Application *owner) : m_owner{owner}, m_has_begun_play{false} {}
@@ -7,7 +6,6 @@ World::World(Application *owner) : m_owner{owner}, m_has_begun_play{false} {}
 void World::begin_play_internal() {
   if (!m_has_begun_play) {
     m_has_begun_play = true;
-    SAGA_LOG("world :: has begun play\n");
     begin_play();
   }
 }

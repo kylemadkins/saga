@@ -1,11 +1,11 @@
 #pragma once
 
 namespace saga {
-class Application;
-class World {
+class World;
+class Actor {
 public:
-  explicit World(Application *owner);
-  virtual ~World() = default;
+  Actor(World *owner);
+  virtual ~Actor() = default;
 
   void begin_play_internal();
   void tick_internal(float delta_time_s);
@@ -13,7 +13,7 @@ public:
   virtual void tick(float delta_time_s);
 
 private:
-  Application *m_owner;
+  World *m_owner;
   bool m_has_begun_play;
 };
 } // namespace saga

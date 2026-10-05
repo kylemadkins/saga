@@ -7,6 +7,8 @@ add_library(
     src/framework/core.cpp
     include/framework/world.h
     src/framework/world.cpp
+    include/framework/actor.h
+    src/framework/actor.cpp
     src/entry_point.cpp
 )
 

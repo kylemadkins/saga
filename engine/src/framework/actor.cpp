@@ -1,0 +1,18 @@
+#include "framework/actor.h"
+
+namespace saga {
+Actor::Actor(World *owner) : m_owner{owner}, m_has_begun_play{false} {}
+
+void Actor::begin_play_internal() {
+  if (!m_has_begun_play) {
+    m_has_begun_play = true;
+    begin_play();
+  }
+}
+
+void Actor::tick_internal(float delta_time_s) { tick(delta_time_s); }
+
+void Actor::begin_play() {}
+
+void Actor::tick(float delta_time_s) {}
+} // namespace saga
