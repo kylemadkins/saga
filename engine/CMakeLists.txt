@@ -5,6 +5,8 @@ add_library(
     src/framework/application.cpp
     include/framework/core.h
     src/framework/core.cpp
+    include/framework/world.h
+    src/framework/world.cpp
     src/entry_point.cpp
 )
 

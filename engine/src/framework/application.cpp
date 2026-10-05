@@ -1,15 +1,16 @@
 #include "framework/application.h"
 #include "framework/core.h"
+#include "framework/world.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include <iostream>
+#include <memory>
 
 namespace saga {
 Application::Application()
     : m_window{sf::VideoMode{{800, 600}}, "Saga"}, m_target_fps{60.0f},
-      m_tick_clock{} {
+      m_tick_clock{}, m_current_world{nullptr} {
   m_window.setVerticalSyncEnabled(true);
 }
 
@@ -30,7 +31,6 @@ void Application::run() {
     }
 
     float delta_time_s = m_tick_clock.restart().asSeconds();
-
     accumulated_time_s += delta_time_s;
     while (accumulated_time_s >= target_delta_time_s) {
       accumulated_time_s -= target_delta_time_s;
@@ -42,7 +42,8 @@ void Application::run() {
     frames++;
 
     if (stats_clock.getElapsedTime().asSeconds() >= 1.f) {
-      saga::log("%d frames, %d ticks in the last second\n", frames, ticks);
+      SAGA_LOG("application :: %d frames, %d ticks in the last second\n",
+               frames, ticks);
       frames = 0;
       ticks = 0;
       stats_clock.restart();
@@ -50,9 +51,16 @@ void Application::run() {
   }
 }
 
-void Application::tick_internal(float delta_time_s) { tick(delta_time_s); }
+void Application::tick_internal(float delta_time_s) {
+  tick(delta_time_s);
 
-void Application::tick(float delta_time_s) { std::cout << "tick\n"; }
+  if (m_current_world) {
+    m_current_world->begin_play_internal();
+    m_current_world->tick_internal(delta_time_s);
+  }
+}
+
+void Application::tick(float delta_time_s) {}
 
 void Application::render_internal() {
   m_window.clear(sf::Color::Black);

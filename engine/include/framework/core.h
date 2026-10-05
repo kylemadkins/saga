@@ -1,9 +1,5 @@
 #pragma once
 
-#include <cstdio>
+#include <cstdio> // IWYU pragma: export
 
-namespace saga {
-template <typename... Args> inline void log(const char *msg, Args... args) {
-  std::printf(msg, args...);
-}
-} // namespace saga
+#define SAGA_LOG(...) std::printf(__VA_ARGS__)
