@@ -1,8 +1,10 @@
 #pragma once
 
+#include "framework/object.h"
+
 namespace saga {
 class World;
-class Actor {
+class Actor : public Object {
 public:
   Actor(World *owner);
   virtual ~Actor() = default;

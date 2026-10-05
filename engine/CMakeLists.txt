@@ -9,6 +9,8 @@ add_library(
     src/framework/world.cpp
     include/framework/actor.h
     src/framework/actor.cpp
+    include/framework/object.h
+    src/framework/object.cpp
     src/entry_point.cpp
 )
 

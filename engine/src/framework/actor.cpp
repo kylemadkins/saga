@@ -1,4 +1,5 @@
 #include "framework/actor.h"
+#include "framework/core.h"
 
 namespace saga {
 Actor::Actor(World *owner) : m_owner{owner}, m_has_begun_play{false} {}
@@ -14,5 +15,5 @@ void Actor::tick_internal(float delta_time_s) { tick(delta_time_s); }
 
 void Actor::begin_play() {}
 
-void Actor::tick(float delta_time_s) {}
+void Actor::tick(float delta_time_s) { SAGA_LOG("actor :: tick\n"); }
 } // namespace saga

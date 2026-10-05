@@ -21,6 +21,15 @@ void World::tick_internal(float delta_time_s) {
   }
   m_pending_actors.clear();
 
+  for (auto it = m_actors.begin(); it != m_actors.end();) {
+    if (it->get()->is_pending_destroy()) {
+      it = m_actors.erase(it);
+    } else {
+      it->get()->tick_internal(delta_time_s);
+      ++it;
+    }
+  }
+
   for (const auto &actor : m_actors) {
     actor->tick_internal(delta_time_s);
   }
