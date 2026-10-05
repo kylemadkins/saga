@@ -15,12 +15,14 @@ void World::begin_play_internal() {
 void World::tick_internal(float delta_time_s) {
   tick(delta_time_s);
 
+  // move and clear pending actors
   for (const auto &pending_actor : m_pending_actors) {
     m_actors.push_back(pending_actor);
     pending_actor->begin_play_internal();
   }
   m_pending_actors.clear();
 
+  // update and destroy actors
   for (auto it = m_actors.begin(); it != m_actors.end();) {
     if (it->get()->is_pending_destroy()) {
       it = m_actors.erase(it);
@@ -28,10 +30,6 @@ void World::tick_internal(float delta_time_s) {
       it->get()->tick_internal(delta_time_s);
       ++it;
     }
-  }
-
-  for (const auto &actor : m_actors) {
-    actor->tick_internal(delta_time_s);
   }
 }
 
