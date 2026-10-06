@@ -7,11 +7,12 @@
 
 namespace saga {
 GameApplication::GameApplication()
-    : Application{1280, 720, "Saga", sf::Style::Titlebar | sf::Style::Close},
+    : Application{1920, 1080, "Saga", sf::Style::Titlebar | sf::Style::Close},
       timer{0.f} {
   std::weak_ptr<World> world = load_world<World>();
   if (auto lworld = world.lock()) {
-    m_player = lworld->spawn_actor<Actor>();
+    m_player = lworld->spawn_actor<Actor>(
+        "assets/kenney_space-shooter-remastered/PNG/playerShip1_blue.png");
   }
 }
 

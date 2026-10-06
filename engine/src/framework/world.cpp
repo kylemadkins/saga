@@ -1,6 +1,8 @@
 #include "framework/world.h"
 #include "framework/actor.h"
 
+#include <SFML/Graphics.hpp>
+
 namespace saga {
 World::World(Application *owner)
     : m_owner{owner}, m_has_begun_play{false}, m_actors{}, m_pending_actors{} {}
@@ -36,4 +38,10 @@ void World::tick_internal(float delta_time_s) {
 void World::begin_play() {}
 
 void World::tick(float delta_time_s) {}
+
+void World::render(sf::RenderWindow &window) {
+  for (const auto &actor : m_actors) {
+    actor->render(window);
+  }
+}
 } // namespace saga

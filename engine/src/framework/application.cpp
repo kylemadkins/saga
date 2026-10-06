@@ -9,13 +9,6 @@
 #include <memory>
 
 namespace saga {
-Application::Application()
-    : m_window{sf::VideoMode{{800, 600}}, "Saga Engine",
-               sf::Style::Titlebar | sf::Style::Close},
-      m_target_fps{60.f}, m_tick_clock{}, m_current_world{nullptr} {
-  m_window.setVerticalSyncEnabled(true);
-}
-
 Application::Application(unsigned int window_width, unsigned int window_height,
                          const std::string &window_title,
                          std::uint32_t window_style)
@@ -85,11 +78,8 @@ void Application::render_internal() {
 }
 
 void Application::render() {
-  sf::RectangleShape rect{sf::Vector2f{100.f, 100.f}};
-  rect.setOrigin(sf::Vector2f{50.f, 50.f});
-  rect.setPosition(
-      sf::Vector2f{m_window.getSize().x / 2.f, m_window.getSize().y / 2.f});
-  rect.setFillColor(sf::Color::Red);
-  m_window.draw(rect);
+  if (m_current_world) {
+    m_current_world->render(m_window);
+  }
 }
 } // namespace saga
