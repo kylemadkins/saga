@@ -5,12 +5,23 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include <cstdint>
 #include <memory>
 
 namespace saga {
 Application::Application()
-    : m_window{sf::VideoMode{{800, 600}}, "Saga"}, m_target_fps{60.0f},
-      m_tick_clock{}, m_current_world{nullptr} {
+    : m_window{sf::VideoMode{{800, 600}}, "Saga Engine",
+               sf::Style::Titlebar | sf::Style::Close},
+      m_target_fps{60.f}, m_tick_clock{}, m_current_world{nullptr} {
+  m_window.setVerticalSyncEnabled(true);
+}
+
+Application::Application(unsigned int window_width, unsigned int window_height,
+                         const std::string &window_title,
+                         std::uint32_t window_style)
+    : m_window{sf::VideoMode{{window_width, window_height}}, window_title,
+               window_style},
+      m_target_fps{60.f}, m_tick_clock{}, m_current_world{nullptr} {
   m_window.setVerticalSyncEnabled(true);
 }
 

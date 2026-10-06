@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include <cstdint>
 #include <memory>
 
 namespace saga {
@@ -10,6 +11,8 @@ class World;
 class Application {
 public:
   Application();
+  Application(unsigned int window_width, unsigned int window_height,
+              const std::string &window_title, std::uint32_t window_style);
   virtual ~Application() = default;
 
   void run();
