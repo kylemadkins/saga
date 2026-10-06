@@ -13,5 +13,6 @@ public:
 
 private:
   std::weak_ptr<Actor> m_player;
+  float timer;
 };
 } // namespace saga
