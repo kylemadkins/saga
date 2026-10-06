@@ -30,6 +30,10 @@ void Application::run() {
       }
     }
 
+    // advance the simulation in fixed steps of target_delta_time_s
+    // for consistent results on fast and slow machines
+    // at 600 fps, renders every frame but only ~1/10 frames runs a tick
+    // at 30 fps, each frame runs two ticks before rendering
     float delta_time_s = m_tick_clock.restart().asSeconds();
     accumulated_time_s += delta_time_s;
     while (accumulated_time_s >= target_delta_time_s) {
@@ -42,6 +46,7 @@ void Application::run() {
     frames++;
 
     if (stats_clock.getElapsedTime().asSeconds() >= 1.f) {
+      // log fps compared to ticks
       SAGA_LOG("application :: %d frames, %d ticks in the last second\n",
                frames, ticks);
       frames = 0;
