@@ -23,6 +23,9 @@ private:
   sf::RenderWindow m_window;
   float m_target_fps;
   sf::Clock m_tick_clock;
+  sf::Clock m_cleanup_clock;
+  float m_cleanup_interval;
+  sf::Clock m_stats_clock;
   std::shared_ptr<World> m_current_world;
 
   void tick_internal(float delta_time_s);

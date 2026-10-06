@@ -1,4 +1,5 @@
 #include "framework/application.h"
+#include "framework/asset_manager.h"
 #include "framework/core.h"
 #include "framework/world.h"
 
@@ -14,16 +15,19 @@ Application::Application(unsigned int window_width, unsigned int window_height,
                          std::uint32_t window_style)
     : m_window{sf::VideoMode{{window_width, window_height}}, window_title,
                window_style},
-      m_target_fps{60.f}, m_tick_clock{}, m_current_world{nullptr} {
+      m_target_fps{60.f}, m_tick_clock{}, m_cleanup_clock{},
+      m_cleanup_interval{2.f}, m_stats_clock{}, m_current_world{nullptr} {
   m_window.setVerticalSyncEnabled(true);
 }
 
 void Application::run() {
   m_tick_clock.restart();
+  m_cleanup_clock.restart();
+  m_stats_clock.restart();
+
   float accumulated_time_s{0.f};
   float target_delta_time_s{1.f / m_target_fps};
 
-  sf::Clock stats_clock;
   int frames{0};
   int ticks{0};
 
@@ -46,16 +50,21 @@ void Application::run() {
       ticks++;
     }
 
+    if (m_cleanup_clock.getElapsedTime().asSeconds() >= m_cleanup_interval) {
+      AssetManager::get().cleanup();
+      m_cleanup_clock.restart();
+    }
+
     render_internal();
     frames++;
 
-    if (stats_clock.getElapsedTime().asSeconds() >= 1.f) {
+    if (m_stats_clock.getElapsedTime().asSeconds() >= 1.f) {
       // log fps compared to ticks
       SAGA_LOG("application :: %d frames, %d ticks in the last second\n",
                frames, ticks);
       frames = 0;
       ticks = 0;
-      stats_clock.restart();
+      m_stats_clock.restart();
     }
   }
 }

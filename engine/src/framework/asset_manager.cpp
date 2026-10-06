@@ -38,6 +38,18 @@ AssetManager::load_texture(const std::string &path) {
   return m_missing_texture;
 }
 
+void AssetManager::cleanup() {
+  for (auto it = m_textures.begin(); it != m_textures.end();) {
+    if (it->second.use_count() == 1) {
+      SAGA_LOG("asset manager :: cleaning up texture with path %s\n",
+               it->first.c_str());
+      it = m_textures.erase(it);
+    } else {
+      ++it;
+    }
+  }
+}
+
 std::shared_ptr<sf::Texture> AssetManager::create_missing_texture() {
   constexpr unsigned size = 64;
   constexpr unsigned cell = 16;
