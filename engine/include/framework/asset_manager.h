@@ -17,7 +17,10 @@ public:
   std::shared_ptr<sf::Texture> load_texture(const std::string &path);
 
 private:
+  std::shared_ptr<sf::Texture> create_missing_texture();
+
   static std::unique_ptr<AssetManager> m_asset_manager;
   std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
+  std::shared_ptr<sf::Texture> m_missing_texture;
 };
 } // namespace saga

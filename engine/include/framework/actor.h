@@ -5,13 +5,14 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <memory>
 #include <string>
 
 namespace saga {
 class World;
 class Actor : public Object {
 public:
-  Actor(World *owner, const std::string &sprite_path);
+  Actor(World *owner, const std::string &path);
   virtual ~Actor();
 
   void begin_play_internal();
@@ -19,12 +20,11 @@ public:
   virtual void begin_play();
   virtual void tick(float delta_time_s);
   void render(sf::RenderWindow &window);
-  void load_sprite(const std::string &sprite_path);
 
 private:
   World *m_owner;
   bool m_has_begun_play;
+  std::shared_ptr<sf::Texture> m_texture;
   sf::Sprite m_sprite;
-  sf::Texture m_texture;
 };
 } // namespace saga
