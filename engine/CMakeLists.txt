@@ -11,6 +11,8 @@ add_library(
     src/framework/actor.cpp
     include/framework/object.h
     src/framework/object.cpp
+    include/framework/asset_manager.h
+    src/framework/asset_manager.cpp
     src/entry_point.cpp
 )
 
