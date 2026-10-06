@@ -8,7 +8,6 @@
 namespace saga {
 GameApplication::GameApplication() : timer{0.f} {
   std::weak_ptr<World> world = load_world<World>();
-  std::weak_ptr<Actor> actor;
   if (auto lworld = world.lock()) {
     m_player = lworld->spawn_actor<Actor>();
   }

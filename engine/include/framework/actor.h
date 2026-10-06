@@ -7,7 +7,7 @@ class World;
 class Actor : public Object {
 public:
   Actor(World *owner);
-  virtual ~Actor() = default;
+  virtual ~Actor();
 
   void begin_play_internal();
   void tick_internal(float delta_time_s);
