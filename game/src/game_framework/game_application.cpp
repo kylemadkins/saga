@@ -4,7 +4,6 @@
 #include "framework/application.h"
 #include "framework/world.h"
 
-#include <iostream>
 #include <memory>
 
 namespace saga {
@@ -13,7 +12,6 @@ GameApplication::GameApplication()
       timer{0.f} {
   std::weak_ptr<World> world = load_world<World>();
   if (auto lworld = world.lock()) {
-    std::cout << get_resource_directory() << "\n";
     m_player = lworld->spawn_actor<Actor>(
         get_resource_directory() +
         "kenney_space-shooter-remastered/PNG/playerShip1_blue.png");
