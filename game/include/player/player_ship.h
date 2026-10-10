@@ -13,8 +13,10 @@ public:
 
 private:
   sf::Vector2f m_input;
-  float m_speed = 500.f;
+  float m_speed = 1000.f;
 
   void handle_input();
+  void handle_movement();
+  void clamp_position();
 };
 } // namespace saga

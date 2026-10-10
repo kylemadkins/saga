@@ -17,6 +17,7 @@ public:
   virtual void tick(float delta_time_s);
   virtual void render();
   template <typename WorldType> std::weak_ptr<WorldType> load_world();
+  sf::Vector2u get_window_size() const;
 
 private:
   sf::RenderWindow m_window;

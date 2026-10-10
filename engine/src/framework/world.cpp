@@ -1,11 +1,16 @@
 #include "framework/world.h"
 #include "framework/actor.h"
+#include "framework/application.h"
 
 #include <SFML/Graphics.hpp>
 
 namespace saga {
 World::World(Application *owner)
     : m_owner{owner}, m_has_begun_play{false}, m_actors{}, m_pending_actors{} {}
+
+sf::Vector2u World::get_window_size() const {
+  return m_owner->get_window_size();
+}
 
 void World::begin_play_internal() {
   if (!m_has_begun_play) {

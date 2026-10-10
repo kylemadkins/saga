@@ -26,6 +26,8 @@ public:
   void set_rotation(float rot);
   void translate(const sf::Vector2f &amount);
   void rotate(float amount);
+  sf::Vector2u get_window_size() const;
+  sf::Vector2f get_size() const;
 
 private:
   World *m_owner;

@@ -19,6 +19,8 @@ Application::Application(unsigned int window_width, unsigned int window_height,
   m_window.setVerticalSyncEnabled(true);
 }
 
+sf::Vector2u Application::get_window_size() const { return m_window.getSize(); }
+
 void Application::run() {
   m_tick_clock.restart();
   m_cleanup_clock.restart();

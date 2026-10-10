@@ -1,6 +1,7 @@
 #include "framework/actor.h"
 #include "framework/asset_manager.h"
 #include "framework/core.h"
+#include "framework/world.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -63,5 +64,13 @@ void Actor::rotate(float amount) { set_rotation(get_rotation() + amount); }
 
 void Actor::center_pivot() {
   m_sprite->setOrigin(m_sprite->getGlobalBounds().getCenter());
+}
+
+sf::Vector2u Actor::get_window_size() const {
+  return m_owner->get_window_size();
+}
+
+sf::Vector2f Actor::get_size() const {
+  return m_sprite->getGlobalBounds().size;
 }
 } // namespace saga
