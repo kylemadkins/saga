@@ -14,7 +14,7 @@ protected:
 public:
   static AssetManager &get();
   std::shared_ptr<sf::Texture> load_texture(const std::string &texture_path);
-  std::string get_root_directory();
+  std::string get_root_directory() const;
   void set_root_directory(const std::string &path);
   void cleanup();
   std::shared_ptr<sf::Texture> create_missing_texture();

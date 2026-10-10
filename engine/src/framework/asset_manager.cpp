@@ -63,7 +63,9 @@ std::shared_ptr<sf::Texture> AssetManager::create_missing_texture() {
   return std::make_shared<sf::Texture>(image);
 }
 
-std::string AssetManager::get_root_directory() { return m_root_directory; }
+std::string AssetManager::get_root_directory() const {
+  return m_root_directory;
+}
 
 void AssetManager::set_root_directory(const std::string &path) {
   m_root_directory = path;
