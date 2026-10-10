@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SFML/Graphics/Texture.hpp"
 #include <SFML/Graphics.hpp>
 
 #include <memory>
