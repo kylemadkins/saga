@@ -15,6 +15,8 @@ GameApplication::GameApplication()
     m_player = lworld->spawn_actor<Actor>(
         get_resource_directory() +
         "kenney_space-shooter-remastered/PNG/playerShip1_blue.png");
+    m_player.lock()->set_position(sf::Vector2f{1920 / 2.f, 1080 / 2.f});
+    m_player.lock()->set_rotation(45.f);
   }
 }
 

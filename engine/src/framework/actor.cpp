@@ -9,7 +9,9 @@
 namespace saga {
 Actor::Actor(World *owner, const std::string &path)
     : m_owner{owner}, m_has_begun_play{false},
-      m_texture{AssetManager::get().load_texture(path)}, m_sprite{*m_texture} {}
+      m_texture{AssetManager::get().load_texture(path)}, m_sprite{*m_texture} {
+  center_pivot();
+}
 
 Actor::~Actor() { SAGA_LOG("actor :: actor destroyed\n"); }
 
@@ -34,5 +36,17 @@ void Actor::render(sf::RenderWindow &window) {
   if (is_pending_destroy())
     return;
   window.draw(m_sprite);
+}
+
+sf::Vector2f Actor::get_position() { return m_sprite.getPosition(); }
+
+void Actor::set_position(const sf::Vector2f &pos) { m_sprite.setPosition(pos); }
+
+float Actor::get_rotation() { return m_sprite.getRotation().asDegrees(); }
+
+void Actor::set_rotation(float rot) { m_sprite.setRotation(sf::degrees(rot)); }
+
+void Actor::center_pivot() {
+  m_sprite.setOrigin(m_sprite.getGlobalBounds().getCenter());
 }
 } // namespace saga
