@@ -16,18 +16,16 @@ GameApplication::GameApplication()
   if (auto lworld = world.lock()) {
     m_player = lworld->spawn_actor<PlayerShip>();
     m_player.lock()->set_position(sf::Vector2f{1920 / 2.f, 1080 / 2.f});
-    m_player.lock()->set_rotation(45.f);
-    m_player.lock()->set_velocity(sf::Vector2f{200.f, -200.f});
   }
 }
 
 void GameApplication::tick(float delta_time_s) {
-  timer += delta_time_s;
-  if (timer >= 2.f) {
-    if (auto lplayer = m_player.lock()) {
-      lplayer->destroy();
-    }
-  }
+  // timer += delta_time_s;
+  // if (timer >= 2.f) {
+  //   if (auto lplayer = m_player.lock()) {
+  //     lplayer->destroy();
+  //   }
+  // }
 }
 
 std::unique_ptr<Application> create_application() {

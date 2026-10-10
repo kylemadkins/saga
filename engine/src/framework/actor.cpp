@@ -55,7 +55,7 @@ float Actor::get_rotation() const {
 
 void Actor::set_rotation(float rot) { m_sprite->setRotation(sf::degrees(rot)); }
 
-void Actor::translate(sf::Vector2f amount) {
+void Actor::translate(const sf::Vector2f &amount) {
   set_position(get_position() + amount);
 }
 

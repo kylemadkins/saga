@@ -24,7 +24,7 @@ public:
   void set_position(const sf::Vector2f &pos);
   float get_rotation() const;
   void set_rotation(float rot);
-  void translate(sf::Vector2f amount);
+  void translate(const sf::Vector2f &amount);
   void rotate(float amount);
 
 private:

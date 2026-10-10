@@ -4,7 +4,6 @@
 #include "framework/world.h"
 
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
 
 #include <cstdint>
 #include <memory>
