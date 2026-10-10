@@ -8,7 +8,8 @@
 
 namespace saga {
 AssetManager::AssetManager()
-    : m_textures{}, m_missing_texture{create_missing_texture()} {}
+    : m_textures{}, m_missing_texture{create_missing_texture()},
+      m_root_directory{""} {}
 
 std::unique_ptr<AssetManager> AssetManager::m_asset_manager{nullptr};
 
@@ -28,7 +29,7 @@ AssetManager::load_texture(const std::string &texture_path) {
   SAGA_LOG("asset manager :: loading texture from path %s\n",
            texture_path.c_str());
   std::shared_ptr<sf::Texture> new_texture = std::make_shared<sf::Texture>();
-  if (new_texture->loadFromFile(texture_path)) {
+  if (new_texture->loadFromFile(m_root_directory + texture_path)) {
     m_textures.insert({texture_path, new_texture});
     return new_texture;
   }
@@ -60,5 +61,11 @@ std::shared_ptr<sf::Texture> AssetManager::create_missing_texture() {
       if ((x / cell + y / cell) % 2 == 0)
         image.setPixel({x, y}, sf::Color::Magenta);
   return std::make_shared<sf::Texture>(image);
+}
+
+std::string AssetManager::get_root_directory() { return m_root_directory; }
+
+void AssetManager::set_root_directory(const std::string &path) {
+  m_root_directory = path;
 }
 } // namespace saga

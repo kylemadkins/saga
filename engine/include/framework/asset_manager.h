@@ -15,13 +15,15 @@ protected:
 public:
   static AssetManager &get();
   std::shared_ptr<sf::Texture> load_texture(const std::string &texture_path);
+  std::string get_root_directory();
+  void set_root_directory(const std::string &path);
   void cleanup();
-
-private:
   std::shared_ptr<sf::Texture> create_missing_texture();
 
+private:
   static std::unique_ptr<AssetManager> m_asset_manager;
   std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
   std::shared_ptr<sf::Texture> m_missing_texture;
+  std::string m_root_directory;
 };
 } // namespace saga

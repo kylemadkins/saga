@@ -11,9 +11,10 @@ namespace saga {
 class World;
 class Actor : public Object {
 public:
-  Actor(World *owner, const std::string &texture_path);
+  Actor(World *owner);
   virtual ~Actor();
 
+  void load_sprite(const std::string &texture_path);
   void begin_play_internal();
   void tick_internal(float delta_time_s);
   virtual void begin_play();
@@ -30,7 +31,7 @@ private:
   World *m_owner;
   bool m_has_begun_play;
   std::shared_ptr<sf::Texture> m_texture;
-  sf::Sprite m_sprite;
+  std::optional<sf::Sprite> m_sprite;
 
   void center_pivot();
 };

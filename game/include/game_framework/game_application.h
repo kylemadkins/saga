@@ -1,7 +1,7 @@
 #pragma once
 
 #include "framework/application.h"
-#include "ship/ship.h"
+#include "player/player_ship.h"
 
 #include <memory>
 
@@ -12,7 +12,7 @@ public:
   void tick(float delta_time_s);
 
 private:
-  std::weak_ptr<Ship> m_player;
+  std::weak_ptr<PlayerShip> m_player;
   float timer;
 };
 } // namespace saga

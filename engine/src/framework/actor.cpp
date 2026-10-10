@@ -7,14 +7,18 @@
 #include <string>
 
 namespace saga {
-Actor::Actor(World *owner, const std::string &texture_path)
-    : m_owner{owner}, m_has_begun_play{false},
-      m_texture{AssetManager::get().load_texture(texture_path)},
-      m_sprite{*m_texture} {
-  center_pivot();
-}
+Actor::Actor(World *owner)
+    : m_owner{owner}, m_has_begun_play{false}, m_texture{}, m_sprite{} {}
 
 Actor::~Actor() { SAGA_LOG("actor :: actor destroyed\n"); }
+
+void Actor::load_sprite(const std::string &texture_path) {
+  m_texture = AssetManager::get().load_texture(texture_path);
+  if (m_texture) {
+    m_sprite = sf::Sprite{*m_texture};
+    center_pivot();
+  }
+}
 
 void Actor::begin_play_internal() {
   if (!m_has_begun_play) {
@@ -36,16 +40,20 @@ void Actor::tick(float delta_time_s) { SAGA_LOG("actor :: tick\n"); }
 void Actor::render(sf::RenderWindow &window) {
   if (is_pending_destroy())
     return;
-  window.draw(m_sprite);
+  window.draw(*m_sprite);
 }
 
-sf::Vector2f Actor::get_position() const { return m_sprite.getPosition(); }
+sf::Vector2f Actor::get_position() const { return m_sprite->getPosition(); }
 
-void Actor::set_position(const sf::Vector2f &pos) { m_sprite.setPosition(pos); }
+void Actor::set_position(const sf::Vector2f &pos) {
+  m_sprite->setPosition(pos);
+}
 
-float Actor::get_rotation() const { return m_sprite.getRotation().asDegrees(); }
+float Actor::get_rotation() const {
+  return m_sprite->getRotation().asDegrees();
+}
 
-void Actor::set_rotation(float rot) { m_sprite.setRotation(sf::degrees(rot)); }
+void Actor::set_rotation(float rot) { m_sprite->setRotation(sf::degrees(rot)); }
 
 void Actor::translate(sf::Vector2f amount) {
   set_position(get_position() + amount);
@@ -54,6 +62,6 @@ void Actor::translate(sf::Vector2f amount) {
 void Actor::rotate(float amount) { set_rotation(get_rotation() + amount); }
 
 void Actor::center_pivot() {
-  m_sprite.setOrigin(m_sprite.getGlobalBounds().getCenter());
+  m_sprite->setOrigin(m_sprite->getGlobalBounds().getCenter());
 }
 } // namespace saga

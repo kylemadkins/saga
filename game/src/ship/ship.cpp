@@ -3,11 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <string>
-
 namespace saga {
-Ship::Ship(World *owner, const std::string &texture_path)
-    : Actor{owner, texture_path} {}
+Ship::Ship(World *owner) : Actor{owner} {}
 
 void Ship::tick(float delta_time_s) {
   Actor::tick(delta_time_s);
