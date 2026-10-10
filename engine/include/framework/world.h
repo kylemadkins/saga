@@ -20,7 +20,7 @@ public:
   virtual void tick(float delta_time_s);
   void render(sf::RenderWindow &window);
   template <typename ActorType>
-  std::weak_ptr<ActorType> spawn_actor(const std::string &path);
+  std::weak_ptr<ActorType> spawn_actor(const std::string &texture_path);
 
 private:
   Application *m_owner;
@@ -30,8 +30,8 @@ private:
 };
 
 template <typename ActorType>
-std::weak_ptr<ActorType> World::spawn_actor(const std::string &path) {
-  auto new_actor = std::make_shared<ActorType>(this, path);
+std::weak_ptr<ActorType> World::spawn_actor(const std::string &texture_path) {
+  auto new_actor = std::make_shared<ActorType>(this, texture_path);
   m_pending_actors.push_back(new_actor);
   return new_actor;
 }

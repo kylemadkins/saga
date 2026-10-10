@@ -20,21 +20,22 @@ AssetManager &AssetManager::get() {
 }
 
 std::shared_ptr<sf::Texture>
-AssetManager::load_texture(const std::string &path) {
-  auto found = m_textures.find(path);
+AssetManager::load_texture(const std::string &texture_path) {
+  auto found = m_textures.find(texture_path);
   if (found != m_textures.end())
     return found->second;
 
-  SAGA_LOG("asset manager :: loading texture from path %s\n", path.c_str());
+  SAGA_LOG("asset manager :: loading texture from path %s\n",
+           texture_path.c_str());
   std::shared_ptr<sf::Texture> new_texture = std::make_shared<sf::Texture>();
-  if (new_texture->loadFromFile(path)) {
-    m_textures.insert({path, new_texture});
+  if (new_texture->loadFromFile(texture_path)) {
+    m_textures.insert({texture_path, new_texture});
     return new_texture;
   }
 
   SAGA_LOG("asset manager :: failed to load texture from path %s\n",
-           path.c_str());
-  m_textures.insert({path, m_missing_texture});
+           texture_path.c_str());
+  m_textures.insert({texture_path, m_missing_texture});
   return m_missing_texture;
 }
 

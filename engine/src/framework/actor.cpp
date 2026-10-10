@@ -7,9 +7,10 @@
 #include <string>
 
 namespace saga {
-Actor::Actor(World *owner, const std::string &path)
+Actor::Actor(World *owner, const std::string &texture_path)
     : m_owner{owner}, m_has_begun_play{false},
-      m_texture{AssetManager::get().load_texture(path)}, m_sprite{*m_texture} {
+      m_texture{AssetManager::get().load_texture(texture_path)},
+      m_sprite{*m_texture} {
   center_pivot();
 }
 
@@ -38,13 +39,19 @@ void Actor::render(sf::RenderWindow &window) {
   window.draw(m_sprite);
 }
 
-sf::Vector2f Actor::get_position() { return m_sprite.getPosition(); }
+sf::Vector2f Actor::get_position() const { return m_sprite.getPosition(); }
 
 void Actor::set_position(const sf::Vector2f &pos) { m_sprite.setPosition(pos); }
 
-float Actor::get_rotation() { return m_sprite.getRotation().asDegrees(); }
+float Actor::get_rotation() const { return m_sprite.getRotation().asDegrees(); }
 
 void Actor::set_rotation(float rot) { m_sprite.setRotation(sf::degrees(rot)); }
+
+void Actor::translate(sf::Vector2f amount) {
+  set_position(get_position() + amount);
+}
+
+void Actor::rotate(float amount) { set_rotation(get_rotation() + amount); }
 
 void Actor::center_pivot() {
   m_sprite.setOrigin(m_sprite.getGlobalBounds().getCenter());

@@ -2,6 +2,8 @@ add_executable(
     game
     include/game_framework/game_application.h
     src/game_framework/game_application.cpp
+    include/ship/ship.h
+    src/ship/ship.cpp
 )
 
 target_include_directories(game PRIVATE include)

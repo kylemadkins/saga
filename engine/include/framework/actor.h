@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SFML/Graphics/RenderWindow.hpp"
 #include "framework/object.h"
 
 #include <SFML/Graphics.hpp>
@@ -12,7 +11,7 @@ namespace saga {
 class World;
 class Actor : public Object {
 public:
-  Actor(World *owner, const std::string &path);
+  Actor(World *owner, const std::string &texture_path);
   virtual ~Actor();
 
   void begin_play_internal();
@@ -20,10 +19,12 @@ public:
   virtual void begin_play();
   virtual void tick(float delta_time_s);
   void render(sf::RenderWindow &window);
-  sf::Vector2f get_position();
+  sf::Vector2f get_position() const;
   void set_position(const sf::Vector2f &pos);
-  float get_rotation();
+  float get_rotation() const;
   void set_rotation(float rot);
+  void translate(sf::Vector2f amount);
+  void rotate(float amount);
 
 private:
   World *m_owner;
