@@ -6,6 +6,10 @@ add_executable(
     src/ship/ship.cpp
     include/player/player_ship.h
     src/player/player_ship.cpp
+    include/weapon/weapon.h
+    src/weapon/weapon.cpp
+    include/weapon/laser_weapon.h
+    src/weapon/laser_weapon.cpp
 )
 
 target_include_directories(game PRIVATE include)

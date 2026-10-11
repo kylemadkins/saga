@@ -1,12 +1,15 @@
 #include "player/player_ship.h"
 #include "framework/world.h"
+#include "weapon/laser_weapon.h"
 
 #include <SFML/Graphics.hpp>
 
 #include <algorithm>
 
 namespace saga {
-PlayerShip::PlayerShip(World *owner) : Ship{owner}, m_input{} {
+PlayerShip::PlayerShip(World *owner)
+    : Ship{owner}, m_input{},
+      m_weapon{std::make_unique<LaserWeapon>(this, 1.f)} {
   Actor::load_sprite(
       "kenney_space-shooter-remastered/PNG/playerShip1_blue.png");
 }
@@ -15,6 +18,12 @@ void PlayerShip::tick(float delta_time_s) {
   Ship::tick(delta_time_s);
   handle_input();
   handle_movement();
+}
+
+void PlayerShip::fire() {
+  if (m_weapon) {
+    m_weapon->fire();
+  }
 }
 
 void PlayerShip::handle_input() {
@@ -36,6 +45,10 @@ void PlayerShip::handle_input() {
 
   if (m_input != sf::Vector2f{0.f, 0.f}) {
     m_input = m_input.normalized();
+  }
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+    fire();
   }
 }
 

@@ -36,7 +36,7 @@ void Actor::tick_internal(float delta_time_s) {
 
 void Actor::begin_play() {}
 
-void Actor::tick(float delta_time_s) { SAGA_LOG("actor :: tick\n"); }
+void Actor::tick(float delta_time_s) {}
 
 void Actor::render(sf::RenderWindow &window) {
   if (is_pending_destroy())
