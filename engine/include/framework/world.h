@@ -18,7 +18,8 @@ public:
   virtual void begin_play();
   virtual void tick(float delta_time_s);
   void render(sf::RenderWindow &window);
-  template <typename ActorType> std::weak_ptr<ActorType> spawn_actor();
+  template <typename ActorType, typename... Args>
+  std::weak_ptr<ActorType> spawn_actor(Args...);
   sf::Vector2u get_window_size() const;
 
 private:
@@ -28,8 +29,9 @@ private:
   std::vector<std::shared_ptr<Actor>> m_pending_actors;
 };
 
-template <typename ActorType> std::weak_ptr<ActorType> World::spawn_actor() {
-  auto new_actor = std::make_shared<ActorType>(this);
+template <typename ActorType, typename... Args>
+std::weak_ptr<ActorType> World::spawn_actor(Args... args) {
+  auto new_actor = std::make_shared<ActorType>(this, args...);
   m_pending_actors.push_back(new_actor);
   return new_actor;
 }

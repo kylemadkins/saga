@@ -73,4 +73,6 @@ sf::Vector2u Actor::get_window_size() const {
 sf::Vector2f Actor::get_size() const {
   return m_sprite->getGlobalBounds().size;
 }
+
+World *Actor::get_world() const { return m_owner; }
 } // namespace saga

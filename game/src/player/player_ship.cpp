@@ -9,7 +9,7 @@
 namespace saga {
 PlayerShip::PlayerShip(World *owner)
     : Ship{owner}, m_input{},
-      m_weapon{std::make_unique<LaserWeapon>(this, 1.f)} {
+      m_weapon{std::make_unique<LaserWeapon>(this, .2f)} {
   Actor::load_sprite(
       "kenney_space-shooter-remastered/PNG/playerShip1_blue.png");
 }

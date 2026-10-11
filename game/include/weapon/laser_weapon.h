@@ -7,11 +7,12 @@ namespace saga {
 class LaserWeapon : public Weapon {
 public:
   LaserWeapon(Actor *owner, float cooldown_time);
-  bool can_fire() const override;
+  bool is_on_cooldown() const override;
 
 private:
   sf::Clock m_cooldown_clock;
   float m_cooldown_time;
+  bool has_fired = false;
 
   void fire_impl() override;
 };
