@@ -10,6 +10,8 @@ add_executable(
     src/weapon/weapon.cpp
     include/weapon/laser_weapon.h
     src/weapon/laser_weapon.cpp
+    include/weapon/projectile.h
+    src/weapon/projectile.cpp
 )
 
 target_include_directories(game PRIVATE include)

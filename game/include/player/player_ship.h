@@ -17,7 +17,7 @@ public:
 
 private:
   sf::Vector2f m_input;
-  float m_speed = 1000.f;
+  float m_speed = 400.f;
   std::unique_ptr<Weapon> m_weapon;
 
   void handle_input();
