@@ -1,5 +1,6 @@
 #include "weapon/projectile.h"
 #include "framework/actor.h"
+#include "framework/core.h"
 
 #include <cmath>
 
@@ -16,8 +17,14 @@ void Projectile::set_speed(float speed) { m_speed = speed; }
 void Projectile::set_damage(float damage) { m_damage = damage; }
 
 void Projectile::tick(float delta_time_s) {
+  SAGA_LOG("projectile :: tick\n");
+
   Actor::tick(delta_time_s);
   move(delta_time_s);
+
+  if (is_out_of_bounds()) {
+    destroy();
+  }
 }
 
 void Projectile::move(float delta_time_s) {

@@ -75,4 +75,14 @@ sf::Vector2f Actor::get_size() const {
 }
 
 World *Actor::get_world() const { return m_owner; }
+
+bool Actor::is_out_of_bounds() const {
+  sf::Vector2f position = get_position();
+  sf::Vector2u window_size = get_window_size();
+  sf::Vector2f player_size = get_size();
+  return position.x < 0.f - player_size.x / 2.f ||
+         position.x > window_size.x + player_size.x / 2.f ||
+         position.y < 0.f - player_size.y / 2.f ||
+         position.y > window_size.y + player_size.y / 2.f;
+}
 } // namespace saga
