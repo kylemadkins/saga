@@ -21,6 +21,7 @@ public:
   template <typename ActorType, typename... Args>
   std::weak_ptr<ActorType> spawn_actor(Args...);
   sf::Vector2u get_window_size() const;
+  void cleanup();
 
 private:
   Application *m_owner;

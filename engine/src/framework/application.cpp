@@ -53,6 +53,8 @@ void Application::run() {
 
     if (m_cleanup_clock.getElapsedTime().asSeconds() >= m_cleanup_interval) {
       AssetManager::get().cleanup();
+      if (m_current_world)
+        m_current_world->cleanup();
       m_cleanup_clock.restart();
     }
 
