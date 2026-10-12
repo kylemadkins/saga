@@ -13,6 +13,8 @@ add_library(
     src/framework/object.cpp
     include/framework/asset_manager.h
     src/framework/asset_manager.cpp
+    include/framework/physics.h
+    src/framework/physics.cpp
     src/entry_point.cpp
 )
 

@@ -76,6 +76,8 @@ sf::Vector2f Actor::get_size() const {
 
 World *Actor::get_world() const { return m_owner; }
 
+sf::FloatRect Actor::get_bounds() const { return m_sprite->getGlobalBounds(); }
+
 bool Actor::is_out_of_bounds() const {
   sf::Vector2f position = get_position();
   sf::Vector2u window_size = get_window_size();
@@ -85,4 +87,6 @@ bool Actor::is_out_of_bounds() const {
          position.y < 0.f - player_size.y / 2.f ||
          position.y > window_size.y + player_size.y / 2.f;
 }
+
+void Actor::on_overlap(Actor *actor) { SAGA_LOG("actor :: overlap\n"); }
 } // namespace saga

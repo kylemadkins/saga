@@ -29,7 +29,9 @@ public:
   sf::Vector2u get_window_size() const;
   sf::Vector2f get_size() const;
   World *get_world() const;
+  sf::FloatRect get_bounds() const;
   bool is_out_of_bounds() const;
+  virtual void on_overlap(Actor *actor);
 
 private:
   World *m_owner;

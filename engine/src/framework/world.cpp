@@ -1,6 +1,7 @@
 #include "framework/world.h"
 #include "framework/actor.h"
 #include "framework/application.h"
+#include "framework/physics.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -33,6 +34,8 @@ void World::tick_internal(float delta_time_s) {
   for (const auto &actor : m_actors) {
     actor->tick_internal(delta_time_s);
   }
+
+  Physics::check_overlaps(m_actors);
 }
 
 void World::cleanup() {
